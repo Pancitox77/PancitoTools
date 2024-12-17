@@ -1,0 +1,54 @@
+plugins {
+    // Apply the java-library plugin for API and implementation separation.
+    id 'java-library'
+}
+
+group = "git.pancitox77"
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit Jupiter for testing.
+    testImplementation libs.junit.jupiter
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Lombok | Agregar ambas líneas para evitar error de Gradle  
+    compileOnly 'org.projectlombok:lombok:1.18.34'  
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    // JavaFX
+    def javaFxVersion = '23.0.1'
+    def os = org.gradle.internal.os.OperatingSystem.current()
+    def system = os.isWindows() ? 'win' : os.isMacOsX() ? 'mac' : 'linux'
+
+    api "org.openjfx:javafx-base:$javaFxVersion:$system"
+    api "org.openjfx:javafx-controls:$javaFxVersion:$system"
+    api "org.openjfx:javafx-graphics:$javaFxVersion:$system"
+    api "org.openjfx:javafx-fxml:$javaFxVersion:$system"
+
+    // GSon  
+    api 'com.google.code.gson:gson:2.10.1'
+
+    // AspectJ (usado para las anotaciones)
+    runtimeOnly 'org.aspectj:aspectjrt:1.9.21'
+    runtimeOnly 'org.aspectj:aspectjweaver:1.9.21'
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    withSourcesJar()
+    withJavadocJar()
+
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
