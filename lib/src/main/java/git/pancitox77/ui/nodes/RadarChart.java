@@ -19,8 +19,11 @@ import lombok.NonNull;
 public class RadarChart extends Canvas {
 
     public static final float DEFAULT_SIZE = 200f;
-    private static final Color DEFAULT_VALUE_ZONE_COLOR = new Color(0, 0, 1, 0.6);
-    private static final Color DEFAULT_EDGE_CIRCLE_COLOR = Color.BLACK;
+    public static final Paint DEFAULT_VALUE_ZONE_COLOR = new Color(0, 0, 1, 0.6);
+    public static final Paint DEFAULT_EDGE_CIRCLE_COLOR = Color.BLACK;
+    public static final Paint DEFAULT_LABEL_COLOR = Color.BLACK;
+    public static final Paint DEFAULT_RING_COLOR = Color.BLACK;
+    public static final Paint DEFAULT_LINE_COLOR = Color.BLACK;
 
     private Map<String, Float> values = new HashMap<>();
     private Point2D center;
@@ -28,11 +31,15 @@ public class RadarChart extends Canvas {
     private int edgesCount = 0;
     private int rings = 1;
 
-    private Color valueZoneColor = DEFAULT_VALUE_ZONE_COLOR;
+    private Paint valueZoneColor = DEFAULT_VALUE_ZONE_COLOR;
     private float edgeToLabelDistance = 20f;
     private float edgeSize = 0f;
-    private Color edgeCircleColor = DEFAULT_EDGE_CIRCLE_COLOR;
+    private Paint edgeCircleColor = DEFAULT_EDGE_CIRCLE_COLOR;
     private Font labelFont = Font.getDefault();
+    private Paint labelColor = DEFAULT_LABEL_COLOR;
+    private Paint ringColor = DEFAULT_RING_COLOR;
+    private Paint lineColor = DEFAULT_LINE_COLOR;
+
     private List<Point2D> edgePoints;
 
     public RadarChart(@NonNull Map<String, Float> values) {
@@ -70,8 +77,8 @@ public class RadarChart extends Canvas {
         }
 
         double margin = Math.max(maxLabelWidth, maxLabelHeight) + edgeToLabelDistance;
-        setWidth(size + margin * 2);
-        setHeight(size + margin * 2);
+        setWidth(size + margin * 1.2);
+        setHeight(size + margin * 1.2);
     }
 
     private void initializeChart(float size) {
@@ -96,7 +103,6 @@ public class RadarChart extends Canvas {
 
     private void draw() {
         GraphicsContext gc = getGraphicsContext2D();
-        gc.setFont(labelFont);
         gc.clearRect(0, 0, getWidth(), getHeight());
         gc.moveTo(center.getX(), center.getY());
 
@@ -108,6 +114,8 @@ public class RadarChart extends Canvas {
     private void drawEdgesConnections(GraphicsContext gc) {
         if (edgesCount < 1) return;
 
+        gc.setStroke(lineColor);
+
         for (Point2D pointPos : edgePoints) {
             connect(gc, center, pointPos);
             drawEdgeCircle(gc, pointPos);
@@ -116,15 +124,15 @@ public class RadarChart extends Canvas {
 
     private void drawEdgeCircle(GraphicsContext gc, Point2D pointPos) {
         if (edgeSize > 0) {
-            Paint prevFill = gc.getFill();
             gc.setFill(edgeCircleColor);
             gc.fillOval(pointPos.getX() - edgeSize / 2, pointPos.getY() - edgeSize / 2, edgeSize, edgeSize);
-            gc.setFill(prevFill);
         }
     }
 
     private void drawRings(GraphicsContext gc, int rings) {
         if (rings < 1) return;
+
+        gc.setStroke(ringColor);
 
         float separation = radius / rings;
         for (int i = 0; i < rings; i++) {
@@ -157,8 +165,7 @@ public class RadarChart extends Canvas {
         drawFilledRing(gc, valuesPoints, valueZoneColor);
     }
 
-    private void drawFilledRing(GraphicsContext gc, List<Point2D> points, Color fillColor) {
-        Paint prevColor = gc.getFill();
+    private void drawFilledRing(GraphicsContext gc, List<Point2D> points, Paint fillColor) {
         gc.setFill(fillColor);
 
         double[] xs = new double[points.size()];
@@ -170,8 +177,6 @@ public class RadarChart extends Canvas {
         }
 
         gc.fillPolygon(xs, ys, points.size());
-
-        gc.setFill(prevColor);
     }
 
     private void drawLabel(GraphicsContext gc, String labelText, float angle) {
@@ -191,6 +196,8 @@ public class RadarChart extends Canvas {
         double y = labelPoint.getY() + (textHeight / 4); // Ajuste para centrado vertical
     
         // Dibujar el texto en las coordenadas ajustadas
+        gc.setFont(labelFont);
+        gc.setFill(labelColor);
         gc.fillText(labelText, x, y);
     }
 
@@ -224,18 +231,33 @@ public class RadarChart extends Canvas {
         draw();
     }
 
-    public void setValueZoneColor(Color color) {
+    public void setValueZoneColor(Paint color) {
         this.valueZoneColor = color;
         draw();
     }
 
-    public void setEdgeCircleColor(Color color) {
+    public void setEdgeCircleColor(Paint color) {
         this.edgeCircleColor = color;
         draw();
     }
 
     public void setLabelFont(Font font) {
         this.labelFont = font;
+        draw();
+    }
+
+    public void setRingColor(Paint lineColor) {
+        this.ringColor = lineColor;
+        draw();
+    }
+
+    public void setLineColor(Paint lineColor) {
+        this.lineColor = lineColor;
+        draw();
+    }
+
+    public void setLabelColor(Paint labelColor) {
+        this.labelColor = labelColor;
         draw();
     }
 }
