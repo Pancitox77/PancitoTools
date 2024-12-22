@@ -11,7 +11,7 @@ Los nodos y clases de interfaz gráfica usan JavaFX.
 
 Aunque no es obligatorio, se recomienda crear la carpeta `i18n/` con un archivo `messages.properties` dentro de `resources/`, para evitar excepciones por traducciones. (Ruta: `resources/i18n/messages.properties`).
 
-## Versión
+## Dependencias
 
 Este proyecto usa JavaFX 23.0.1 y Java 21.
 
