@@ -21,7 +21,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     // FXTransitions
-    api files('libs/fxtransitions.jar')
+    api files('libs/fxtransitions-1.0.0.jar')
 
     // JavaFX
     def javaFxVersion = '23.0.1'
