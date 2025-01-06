@@ -27,7 +27,7 @@ public class Translator {
     /**
      * El paquete de traducciones, obtenido luego de cargar el locale y la ruta de traducciones.
      */
-    @Getter private static ResourceBundle messageBundle = null;
+    private static ResourceBundle messageBundle = null;
 
     private Translator(){}
 
@@ -115,5 +115,22 @@ public class Translator {
      */
     public static boolean isLike(String value, String key) {
         return value.equals(tr(key));
+    }
+
+    /**
+     * Obtiene el paquete de traducciones. Si no existe, lo crea.
+     * Este método no devuelve null, pero si la ruta o el idioma es incorrecto, se lanzará una excepción.
+     * Para saber si el paquete de traducciones existe, se puede usar el método {@link #hasMessageBundle()}.
+     * @return messageBundle
+      */
+    public static ResourceBundle getMessageBundle() {
+        if (messageBundle == null) {
+            messageBundle = ResourceBundle.getBundle(translationPath, locale);
+        }
+        return messageBundle;
+    }
+
+    public static boolean hasMessageBundle() {
+        return messageBundle != null;
     }
 }
