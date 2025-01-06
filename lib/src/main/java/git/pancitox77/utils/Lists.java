@@ -130,12 +130,9 @@ public class Lists {
       */
     public static <T> List<T> stringToList(String str, String separator, Class<T> clazz) throws RuntimeException {
         // Remover corchetes ("[]") si los tiene
-        boolean hasOpenBracket = str.startsWith("[");
-        boolean hasCloseBracket = str.endsWith("]");
-
-        int from = hasOpenBracket ? 1 : 0;
-        int to = hasCloseBracket ? str.length() - 1 : str.length();
-        str = str.substring(from, to);
+        if (str.startsWith("[") && str.endsWith("]")) {
+            str = str.substring(1, str.length() - 1);
+        }
 
         // Convertir el string a lista de string
         String[] elements = str.split(separator);

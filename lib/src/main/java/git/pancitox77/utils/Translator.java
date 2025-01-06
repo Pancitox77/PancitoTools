@@ -27,7 +27,7 @@ public class Translator {
     /**
      * El paquete de traducciones, obtenido luego de cargar el locale y la ruta de traducciones.
      */
-    @Getter private static ResourceBundle messageBundle = ResourceBundle.getBundle(translationPath, locale);
+    @Getter private static ResourceBundle messageBundle = null;
 
     private Translator(){}
 
@@ -75,13 +75,15 @@ public class Translator {
     }
 
     /**
-     * Method to retrieve a translated string from the resource bundle.
      * Método para obtener un string traducido del paquete de traducciones.
      * 
      * @param str La llave del string a buscar
      * @return El string traducido
      */
     public static String tr(String str) {
+        if (messageBundle == null) {
+            messageBundle = ResourceBundle.getBundle(translationPath, locale);
+        }
         return messageBundle.getString(str);
     }
 

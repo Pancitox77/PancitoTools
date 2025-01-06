@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.text.MessageFormat;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
@@ -45,7 +44,7 @@ public class Resources {
     @Getter @Setter private static String fontsDir = "fonts";
     @Getter @Setter private static String jsonDir = "json";
     @Getter @Setter private static String propertiesDir = "env";
-    @Getter @Setter private static Optional<Stage> currentStage = Optional.empty();
+    @Getter @Setter private static Stage currentStage = null;
 
     private Resources() {}
 
@@ -63,16 +62,15 @@ public class Resources {
       */
     @SneakyThrows
     public static void showView(String viewName) {
-        if (!currentStage.isPresent()) {
+        if (currentStage == null) {
             return;
         }
         
         Parent root = FXMLLoader.load(getView(viewName));
         Scene scene = new Scene(root);
 
-        Stage stage = currentStage.get();
-        stage.setScene(scene);
-        stage.show();
+        currentStage.setScene(scene);
+        currentStage.show();
     }
 
     /**
@@ -93,16 +91,15 @@ public class Resources {
       */
     @SneakyThrows
     public static void showView(String viewName, ResourceBundle bundle) {
-        if (!currentStage.isPresent()) {
+        if (currentStage == null) {
             return;
         }
         
         Parent root = FXMLLoader.load(getView(viewName), bundle);
         Scene scene = new Scene(root);
 
-        Stage stage = currentStage.get();
-        stage.setScene(scene);
-        stage.show();
+        currentStage.setScene(scene);
+        currentStage.show();
     }
 
     /**
@@ -124,7 +121,7 @@ public class Resources {
       */
     @SneakyThrows
     public static <T> void showView(String viewName, Consumer<T> controllerCallback) {
-        if (!currentStage.isPresent()) {
+        if (currentStage == null) {
             return;
         }
         
@@ -132,13 +129,12 @@ public class Resources {
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
-        Stage stage = currentStage.get();
-        stage.setScene(scene);
+        currentStage.setScene(scene);
 
         T controller = loader.getController();
         controllerCallback.accept(controller);
 
-        stage.show();
+        currentStage.show();
     }
 
     /**
@@ -164,7 +160,7 @@ public class Resources {
       */
     @SneakyThrows
     public static <T> void showView(String viewName, ResourceBundle bundle, Consumer<T> controllerCallback) {
-        if (!currentStage.isPresent()) {
+        if (currentStage == null) {
             return;
         }
         
@@ -172,13 +168,12 @@ public class Resources {
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
-        Stage stage = currentStage.get();
-        stage.setScene(scene);
+        currentStage.setScene(scene);
 
         T controller = loader.getController();
         controllerCallback.accept(controller);
 
-        stage.show();
+        currentStage.show();
     }
 
     /**
