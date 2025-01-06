@@ -130,6 +130,11 @@ public class Translator {
         return messageBundle;
     }
 
+    /**
+     * Verifica si el paquete de traducciones existe.
+     * Como {@link #getMessageBundle()} no devuelve null, este método es útil para saber si el paquete de traducciones
+     * @return Si el paquete de traducciones existe (no es nulo)
+      */
     public static boolean hasMessageBundle() {
         return messageBundle != null;
     }
