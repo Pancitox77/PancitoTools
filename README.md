@@ -9,7 +9,7 @@ Los nodos y clases de interfaz gráfica usan JavaFX.
 > la clase `Resources`. Se recomienda que se configuren las rutas antes de usar cualquier clase.
 > La clase Resources convierte una ruta relativa (dentro de `resources/` como base) a una ruta absoluta.
 
-Aunque no es obligatorio, se recomienda crear la carpeta `i18n/` con un archivo `messages.properties` dentro de `resources/`, para evitar excepciones por traducciones. (Ruta: `resources/i18n/messages.properties`).
+Por defecto, las traducciones se cargan en `resources/i18n/messages.properties`, aunque se puede cambiar usando los métodos relacionados de la clase Translator.
 
 ## Dependencias
 
