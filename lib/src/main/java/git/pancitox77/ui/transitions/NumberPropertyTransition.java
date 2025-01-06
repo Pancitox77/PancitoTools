@@ -8,6 +8,7 @@ import javafx.util.Duration;
 /**
  * Crea una transición que cambia el valor de una propiedad (numérica)
  * a través del tiempo.
+ * @param <T> El tipo de número que se va a cambiar.
 */
 public class NumberPropertyTransition<T extends Number> extends Transition {
 

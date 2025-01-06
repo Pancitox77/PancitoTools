@@ -10,7 +10,7 @@ import lombok.SneakyThrows;
 
 /**
  * Clase usada para controlar archivos de propiedades (.properties).
- * Las rutas de archivos de propiedades se guardan en {@link git.pancitox77.utils.Resources#getPropertiesDir()}.
+ * Las rutas de archivos de propiedades se guardan en {@link git.pancitox77.utils.Resources}.
  * 
  * Las propiedades de "app.properties" sobreescriben a las de "default.properties".
 */
@@ -25,7 +25,6 @@ public class Environment {
      * app.properties sobreescribe las propiedades de default.properties.
      * Las propiedades se almacenan en resources/env/ .
      * @return Las propiedades en cuestión.
-     * @category files
       */
     @SneakyThrows
     public static Properties getProperties(){
