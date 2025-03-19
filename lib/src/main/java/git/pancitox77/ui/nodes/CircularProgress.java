@@ -82,7 +82,7 @@ public class CircularProgress extends Canvas {
     public CircularProgress(double width, double height, int strokeWidth) {
         super(width, height);
         this.strokeWidthProperty.set(strokeWidth);
-        progressProperty.addListener((obs) -> draw());
+        progressProperty.addListener(_ -> draw());
         draw();
     }
 

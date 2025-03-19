@@ -40,7 +40,7 @@ public class Transitions {
         fadeIn.setToValue(1);
 
         fadeIn.setOnFinished(ev -> onFinished.accept(ev));
-        fadeOut.setOnFinished(ev -> fadeIn.play());
+        fadeOut.setOnFinished(_ -> fadeIn.play());
         fadeOut.play();
     }
 
@@ -63,7 +63,7 @@ public class Transitions {
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
 
-        fadeOut.setOnFinished(ev -> fadeIn.play());
+        fadeOut.setOnFinished(_ -> fadeIn.play());
         fadeOut.play();
     }
 }

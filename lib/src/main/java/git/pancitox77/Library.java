@@ -20,7 +20,7 @@ public class Library {
             0,
             1
         );
-        transition.setOnFinished(ev -> System.out.println("Opacidad final: " + opacity.get()));
+        transition.setOnFinished(_ -> System.out.println("Opacidad final: " + opacity.get()));
         transition.play();
     }
 }
