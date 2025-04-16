@@ -38,7 +38,7 @@ public class Views {
     /**
      * Carga un archivo FXMl y lo establece como vista actual.
      * Usa 'viewChanger' para cambiar la vista (transiciones, stylesheets, etc.)
-     * @param viewName Nombre de la vista (sin extensión). Relativo a {@link ReadOnlyResources.getViewsDir()}
+     * @param viewName Nombre de la vista (sin extensión). Relativo a ReadOnlyResources.getViewsDir()
       */
     @SneakyThrows
     public static <T> void showView(String viewName) {
