@@ -29,7 +29,7 @@ public class Translator {
      */
     private static ResourceBundle messageBundle = null;
 
-    private Translator(){}
+    private Translator() {}
 
     /**
      * Método setter para el locale y la ruta de traducciones.

@@ -12,14 +12,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import git.pancitox77.utils.Resources;
-
 /**
  * Utilidades para el manejo de archivos JSON.
  * Utiliza la librería Gson.
  * Provee funciones de lectura y escritura, tanto para objetos como para arrays.
  * 
- * Excepto por los métodos "..abs()", el resto de métodos usan {@link Resources#getJson(String)}
+ * Excepto por los métodos "..abs()", el resto de métodos usan {@link ReadOnlyResources#getJson(String)}
 */
 public class JsonTools {
 
@@ -34,7 +32,7 @@ public class JsonTools {
      * @see #readObject(String)
       */
     public static String read(String fileName){
-        return readAbs(Resources.getJson(fileName));
+        return readAbs(ReadOnlyResources.getJson(fileName));
     }
 
     /**
@@ -110,7 +108,7 @@ public class JsonTools {
      * @param prettyJson Si es true, transformar el elemento a str usando {@link #prettyJson(Object)}
       */
     public static void writeElement(String fileName, JsonElement element, boolean prettyJson){
-        try (FileWriter writer = new FileWriter(Resources.getJson(fileName))) {
+        try (FileWriter writer = new FileWriter(ReadOnlyResources.getJson(fileName))) {
             String json = prettyJson ? prettyJson(element) : new Gson().toJson(element);
             writer.write(json);
 

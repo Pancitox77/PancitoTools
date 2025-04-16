@@ -24,7 +24,7 @@ public class Signals {
      * @param callback Función a llamar cuando se dispare la señal.
       */
     public static void register(String signalName, SignalCallback callback) {
-        callbacks.computeIfAbsent(signalName, k -> new ArrayList<>());
+        callbacks.computeIfAbsent(signalName, _ -> new ArrayList<>());
         callbacks.get(signalName).add(callback);
     }
 
