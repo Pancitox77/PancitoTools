@@ -1,8 +1,8 @@
 package git.pancitox77.utils;
 
-public class Utils {
+public class Range {
     
-    private Utils() {}
+    private Range() {}
 
     public static boolean between(float value, float min, float max) {
         return min < value && value < value;
